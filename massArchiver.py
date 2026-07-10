@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 # Created by: Moksh Chitkara
-# Last Update: May 11th 2026
-# v0.3.0
+# Last Update: Jul 10th 2026
+# v0.4.0
 # Copyright (C) 2026  Moksh Chitkara
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
@@ -169,7 +169,10 @@ class PathMem:
 		self.dbInfo = dbInfo
 		self.dbType = dbInfo['DbType']
 		self.dbName = dbInfo['DbName']
-		self.dbIp = dbInfo['IpAddress']
+		try:
+			self.dbIp = dbInfo['IpAddress']
+		except:
+			self.dbIp = None
 		self.path = [self.dbName]
 		
 	def __str__(self):
@@ -426,7 +429,8 @@ def _close(ev):
 ################################################################################################
 # GUI Elements #
 # manipulations
-dataTree()
+toqueue = PathMem(projectManager.GetCurrentDatabase())
+projTree()
 # button presses
 window.On.MAWin.Close = _close
 window.On.browser.ItemDoubleClicked = _tree
